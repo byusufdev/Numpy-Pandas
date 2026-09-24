@@ -7,6 +7,7 @@ import numpy as np
     # ----------------- dimension maniupulation -----------------
     # ----------------- indexing/copying/slicing/conditional slicing -----------------
     # ----------------- array from existing data -----------------
+    # ----------------- basic array operations -----------------
 
 
 # ----------------- GENERATING ARRAYS -----------------
@@ -144,9 +145,12 @@ cc_stack = np.column_stack((c_arr, c_arr)) # column_stack with 1d arrays creates
 cc_flat = np.hstack((c_arr, c_arr)) # hstack maintains a 1d array when joining the two arrays 
 # print(cc_flat)
 
-bb_stack = np.hstack((b_arr, b_arr))
-print(bb_stack)
+bb_stack = np.hstack((b_arr, b_arr)) # hstack works similar to column_stack when working with 2d arrays
+# print(bb_stack)
 
-bb_split = np.hsplit(bb_stack, [1])
-print(bb_split)
+bb_split = np.hsplit(bb_stack, [1]) # used to split arrays at a specific column (after first). Not using square brackets splits into 'n' number of arrays
+# print(bb_split)
 
+
+
+# ----------------- BASIC ARRAY OPERATIONS -----------------
