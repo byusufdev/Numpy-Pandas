@@ -5,11 +5,12 @@ import numpy as np
     # ----------------- sorting -----------------
     # ----------------- reshaping -----------------
     # ----------------- dimension maniupulation -----------------
-    # ----------------- indexing/copyingslicing -----------------
+    # ----------------- indexing/copying/slicing/conditional slicing -----------------
+    # ----------------- array from existing data -----------------
 
 
 # ----------------- GENERATING ARRAYS -----------------
-a_arr = np.empty(1) # generate an empty 1d/vector array with a single element (contains arbitrary uninitialised data)
+a_arr = np.empty(1) # generate an empty 1d/vector array with a single element (contains arbitrary uninitialised data), can also use np.zeros (array of 0s) or np.ones (array of 1s) 
 # print(a_arr)
 
 b_arr = np.array([[2, 10, 3], [9, 13, 8], [1,1,1]]) # 2d array
@@ -20,13 +21,13 @@ c_arr = np.linspace(2, 10, num = 3, dtype=np.int64) # linearly spaced, integer o
 
 # ----------------- CONCATENATING ARRAYS -----------------
 # np.concatenate only works if both arrays have the same number of dimensions
-# Can dimension match by using np.newaxis (see below) or enclosing an array into a list e.g., [c_arr] --> turns 1d array into a 2d row vector then use concatenate or append
-# An alternative approach: a = np.append(b_arr, [c_arr], axis = 0) ------ axis = 0 adds as row, axis = 1 adds as column
+# Can dimension match by using np.newaxis (see below) or enclosing an array into a list e.g., [c_arr] --> turns 1d array into a 2d row vector then use concatenate
+# An alternative approach if dimension match: a = np.append(b_arr, [c_arr], axis = 0) ------ axis = 0 adds as row, axis = 1 adds as column
 
 # OR
 # To join as a row, use np.vstack ------ Note: number of elements in 1d array must match number of columns in 2d array
 # To join as a column, use np.column_stack ----- Note: number of elements in 1d array must match number of rows in 2d array
-# No need to dimension match with these ---- note: this doesnt work for arrasy above 2d
+# No need to dimension match with these ---- note: this doesnt work for arrays above 2d
 
 a_arr = np.vstack((b_arr, c_arr))
 # print(a_arr)
@@ -44,15 +45,15 @@ a_arr = np.sort(a_arr)
 
 
 # ----------------- RESHAPING -----------------
-# ndim = number of dimensions (2)
-# size = total number of elements in the array (9)
-# shape = tuple showing the size of each dimension (rows, columns) -> (3, 3)
+# .ndim = number of dimensions
+# .size = total number of elements in the array 
+# .shape = tuple showing the size of each dimension --> (rows, columns)
 
 # print(a_arr.size, a_arr.shape)
 
 # np.reshape() can change shape of array 
 # i.e., d = a_arr.reshape(6,2) ------- Provided the elements match i.e, (4,3) --> (6,2). Each have a total of 12 elements
-# to specify reading order, use "C" for row by row (all elements on row first) and "F" for column by column (all elements on column first)
+# to specify reading order, use "C" to go row by row (all elements on row first) and "F" to go column by column (all elements on column first)
 d_arr = np.reshape(a_arr, (6, 2), order='C')
 e_arr = np.reshape(a_arr, (6, 2), order='F')
 # print(" ")
@@ -79,7 +80,7 @@ c3_arr = np.expand_dims(c_arr, axis = 0) # axis = 1 creates a column vector, axi
 
 
 
-# ----------------- INDEXING/COPYING/SLICING -----------------
+# ----------------- INDEXING/COPYING/SLICING/CONDITIONAL SLICING -----------------
 # Indexing works the same as python lists
 data1 = c_arr[0]         # --> 2
 data2 = c_arr[0:3]       # --> [2, 6, 10]
@@ -106,11 +107,46 @@ divisible_by_2 = b_arr[b_arr%2 == 0]  # Elements within b_arr divisible by 2
 # print(b_arr)
 # print(divisible_by_2)
 
-op_slice = b_arr[(b_arr <= 3) & (b_arr %2 == 0)] # Elements within b_arr <= 3 AND divisible by 2 
+op_slice = b_arr[(b_arr <= 3) | (b_arr %2 == 0)] # Elements within b_arr <= 3 OR divisible by 2 
 # print(b_arr)
 # print(op_slice)
 
-op_slice_bool = (b_arr <= 3) & (b_arr %2 == 0) # Same as above but returns boolean values for each element in b_arr
+op_slice_bool = (b_arr <= 3) | (b_arr %2 == 0) # Same as above but returns boolean values for each element in b_arr
 # print(b_arr)
 # print(op_slice_bool)
+
+# Can use np.nonzero() function to select elements or indices within an array that meet certain conditions
+b2_arr = np.nonzero(b_arr < 5) # returns a tuple of two arrays, first array = row indices and second array = column indices, of all elements in b_arr < 5
+# print(b_arr)
+# print(b2_arr)
+# If there are no elements that meet the condition, the arrays will be empty
+
+# Can print as below
+# print(b_arr[b2_arr])
+
+# Or: To generate a list of coordinates, use zip function to pair relevant indicies together and compile them into a list
+list_of_coordinates = list(zip(b2_arr[0], b2_arr[1]))
+# print(b_arr)
+# for coord in list_of_coordinates:
+    # print(coord)
+
+
+
+
+# ----------------- ARRAY FROM EXISTING DATA -----------------
+f_arr = np.array([1,  2,  3,  4,  5,  6,  7,  8,  9, 10])
+f2_arr = f_arr[3:8]
+# print(f_arr)
+# print(f2_arr)
+
+cc_stack = np.column_stack((c_arr, c_arr)) # column_stack with 1d arrays creates a 2d array
+# print(cc_stack)
+cc_flat = np.hstack((c_arr, c_arr)) # hstack maintains a 1d array when joining the two arrays 
+# print(cc_flat)
+
+bb_stack = np.hstack((b_arr, b_arr))
+print(bb_stack)
+
+bb_split = np.hsplit(bb_stack, [1])
+print(bb_split)
 
