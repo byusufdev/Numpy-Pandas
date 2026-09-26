@@ -11,9 +11,17 @@ import numpy as np
     # ----------------- higher dimensional manipulation -----------------
 
 
+
+
 # ----------------- GENERATING ARRAYS -----------------
 a_arr = np.empty(1) # generate an empty 1d/vector array with a single element (contains arbitrary uninitialised data), can also use np.zeros (array of 0s) or np.ones (array of 1s) 
 # print(a_arr)
+
+rng = np.random.default_rng()
+random_array = rng.random((3, 2))
+# print(random_array)
+random_int = rng.integers(78, size = (2, 15))
+# print(random_int)
 
 ones3d = np.ones((4, 3, 2)) # generaters a 3d array of ones --> 4 matrices arranged in a 3x2
 # print(ones3d)
@@ -195,3 +203,17 @@ inarray = np.array([[1,2], [3,4], [5,6]])
 # print(inarray.max(axis = 0))
 # print(inarray.max(axis = 1))
 
+multi_array = np.array([[11, 11, 12, 13, 14], [11, 11, 12, 13, 14], [15, 16, 17, 12, 13], [11, 14, 18, 19, 20]])
+# print(np.unique(multi_array, return_index = True, return_counts=True))
+
+unique_values, occurence_count, indices = np.unique(multi_array, axis=0, return_counts = True, return_index = True) # returns unqiue values within the array + their index + frequency
+# print(unique_values)
+# print(indices)
+# print(occurence_count)
+
+unique_rows, row_count = np.unique(multi_array, axis=0, return_counts=True)
+# print(unique_rows)
+# print(row_count)
+unique_columns, column_count = np.unique(multi_array, axis=1, return_counts=True)
+# print(unique_rows)
+# print(column_count)
