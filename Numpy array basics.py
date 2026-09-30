@@ -8,11 +8,23 @@ import numpy as np
     # ----------------- indexing/copying/slicing/conditional slicing -----------------
     # ----------------- array from existing data -----------------
     # ----------------- basic array operations -----------------
+    # ----------------- higher dimensional manipulation -----------------
+
+
 
 
 # ----------------- GENERATING ARRAYS -----------------
 a_arr = np.empty(1) # generate an empty 1d/vector array with a single element (contains arbitrary uninitialised data), can also use np.zeros (array of 0s) or np.ones (array of 1s) 
 # print(a_arr)
+
+rng = np.random.default_rng()
+random_array = rng.random((3, 2))
+# print(random_array)
+random_int = rng.integers(78, size = (2, 15))
+# print(random_int)
+
+ones3d = np.ones((4, 3, 2)) # generaters a 3d array of ones --> 4 matrices arranged in a 3x2
+# print(ones3d)
 
 b_arr = np.array([[2, 10, 3], [9, 13, 8], [1,1,1]]) # 2d array
 c_arr = np.linspace(2, 10, num = 3, dtype=np.int64) # linearly spaced, integer only, 1d array between 2 and 10 --> [2, 6, 10]
@@ -154,3 +166,54 @@ bb_split = np.hsplit(bb_stack, [1]) # used to split arrays at a specific column 
 
 
 # ----------------- BASIC ARRAY OPERATIONS -----------------
+# addition, subtraction, multiplication, division
+data = np.array([1, 2])
+ones = np.ones(2, dtype=int)
+# print(data + ones)
+# print(data - ones)
+# print(data * ones)
+# print(data / ones)
+
+# Operations between scalar and array
+# print(data * 10)
+
+# sum()
+dones = np.vstack((data, ones))
+# print(data.sum())
+# print(dones.sum(axis = 0))
+# print(dones.sum(axis = 1))
+
+# min, max
+# print(dones.min())
+# print(dones.max())
+# print(dones.min(axis = 1))
+# print(dones.max(axis = 0))
+
+
+# ----------------- HIGHER DIMENSIONAL MANIPULATION -----------------
+# On arrays > 1d, can use indexing across rows/columns
+inarray = np.array([[1,2], [3,4], [5,6]])
+# print(inarray)
+# print(inarray[0,1]) #print element on row 1, column 2
+# print(inarray[1:3]) #print row 2 and row 3
+# print(inarray[0:2, 0]) #print all elements on column 1 that are on row 1 and row 2
+
+# print(inarray.min(axis = 0))
+# print(inarray.min(axis = 1))
+# print(inarray.max(axis = 0))
+# print(inarray.max(axis = 1))
+
+multi_array = np.array([[11, 11, 12, 13, 14], [11, 11, 12, 13, 14], [15, 16, 17, 12, 13], [11, 14, 18, 19, 20]])
+# print(np.unique(multi_array, return_index = True, return_counts=True))
+
+unique_values, occurence_count, indices = np.unique(multi_array, axis=0, return_counts = True, return_index = True) # returns unqiue values within the array + their index + frequency
+# print(unique_values)
+# print(indices)
+# print(occurence_count)
+
+unique_rows, row_count = np.unique(multi_array, axis=0, return_counts=True)
+# print(unique_rows)
+# print(row_count)
+unique_columns, column_count = np.unique(multi_array, axis=1, return_counts=True)
+# print(unique_rows)
+# print(column_count)
