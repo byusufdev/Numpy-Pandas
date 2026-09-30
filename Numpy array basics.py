@@ -217,3 +217,10 @@ unique_rows, row_count = np.unique(multi_array, axis=0, return_counts=True)
 unique_columns, column_count = np.unique(multi_array, axis=1, return_counts=True)
 # print(unique_rows)
 # print(column_count)
+
+
+
+# more functions
+#np.where
+#np.clip
+#np.min, np.max, np.mean, np.std, np.median
