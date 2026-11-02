@@ -1,0 +1,9 @@
+trial_idx	cue_label	reaction_time_ms	bad_trial	channel_raw
+0	left_hand	450.2	False	Cz.. 
+1	right_hand	512.8	False	 C3.
+2	left_hand	nan	True	C4.. 
+3	right_hand	489.1	False	Fz 
+4	left_hand	530.4	False	 Cz 
+5	right_hand	610.0	True	C3..
+6	left_hand	420.5	False	C4 
+7	right_hand	495.3	False	Cz..
