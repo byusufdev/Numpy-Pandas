@@ -10,15 +10,15 @@ spike_cols = np.random.randint(0, 4, size=8)
 data[spike_rows, spike_cols] = np.random.uniform(100.0, 250.0, size=8)
 
 # --- Your pipeline starts here ---
-q3, q1 = np.percentile(data, [75, 25], axis = 0)
+q3, q1 = np.percentile(data, [75, 25], axis = 0) # assigns upper and lower quartile values
 # print(q3, q1)
 iqr = q3 - q1
 # print(iqr)
 
-l_bound = q1 - (1.5*iqr)
-u_bound = q3 + (1.5*iqr)
+l_bound = q1 - (1.5*iqr) # creates the lower bound
+u_bound = q3 + (1.5*iqr) # creates the upper bound
 
-winsorized_data = np.clip(data, l_bound, u_bound)
+winsorized_data = np.clip(data, l_bound, u_bound) # winsorizes the data by setting a floor and ceiling to the data (flr = lower bound, ceil = upper bpound)
 
 col_min = np.min(winsorized_data, axis = 0)
 col_max = np.max(winsorized_data, axis = 0)
