@@ -1,0 +1,11 @@
+trial_id,subject_id,cue,lead_channel,rt_ms,artifact_flag
+1001,S101,left_hand, C3.. ,480.5,False
+1002,S102,right_hand,Cz... ,512.0,False
+1003,S101,right_hand, C4 ,nan,False
+1004,S103,feet,Cz.. ,620.3,False
+1005,S999,left_hand,C3. ,430.0,False
+1006,S104,right_hand, Fz.. ,590.2,True
+1007,S102,left_hand,Cz ,nan,True
+1008,S105,feet, C4.. ,540.8,False
+1009,S101,left_hand,C3 ,460.1,False
+1010,S103,right_hand,Cz. ,505.4,False
